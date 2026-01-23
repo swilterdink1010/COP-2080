@@ -12,7 +12,7 @@ valid_inputs = ["A", "R", "M", "P", "Q"]
 while (user_input != "Q"):
 # Prevent unexected inputs by converting input to upper-case
 # Check user input for the following "(A)dd, (R)emove, (M)odify, (P)rint all, or (Q)uit? "
-    if (user_input := input("(A)dd, (R)emove, (M)odify, (P)rint all, or (Q)uit? ").upper) in valid_inputs:
+    if (user_input := str(input("(A)dd, (R)emove, (M)odify, (P)rint all, or (Q)uit? ")).upper()) in valid_inputs:
         match user_input:
 
         # Use a condition to handle adding a new student.
@@ -22,8 +22,18 @@ while (user_input != "Q"):
         # Gather user input for student grade "Enter the student's grade: "
         # Validate input is in correct format or range, if not notify "Please enter grade as number 0-100"
             case "A":
-                pass
-
+                input_student = str(input("Enter the name of the student: "))
+                if input_student not in grades.keys():
+                    print("Sorry, that student is already present.")
+                    continue
+                input_grade = -1
+                while (input_grade < 0 or input_grade > 100):
+                    try:
+                        input_grade = int(input("Enter the student's grade: "))
+                        if (input_grade < 0 or input_grade > 100):
+                            print("Please enter grade as number 0-100")
+                    except ValueError:
+                        print("Please enter grade as number 0-100")
         # Handle removing a student if user inputs 'R'
         # Check input for "What student do you want to remove? "
         # use pop to remove key/value form grades
@@ -54,4 +64,5 @@ while (user_input != "Q"):
 
     # Handle the case of invalid input. "Sorry, that wasn't a valid choice."
     else:
+        print(user_input)
         print("Sorry, that wasn't a valid choice.")
