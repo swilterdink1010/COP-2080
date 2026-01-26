@@ -21,8 +21,12 @@ Handles user i/o using functions from 06_functional_programming.grade_compute
 import grade_compute as gc
 
 # Use infinite loop because input_verify() detects user input of "Q" and uses the inbuilt method quit() to terminate
-while True:
-    grades_letter = gc.input_verify()
-    grades_gpa = gc.gpa_parse(grades_letter)
+def main():
+    while True:
+        grades_letter = gc.input_verify()
+        grades_gpa = gc.gpa_parse(grades_letter)
 
-    gc.print_summary(grades_letter, grades_gpa)
+        gc.print_summary(grades_letter, grades_gpa)
+        
+if __name__ == "__main__":
+    main()
