@@ -94,5 +94,4 @@ while user_input != "Q":
 
     # Handle the case of invalid input. "Sorry, that wasn't a valid choice."
     else:
-        print(user_input)
         print("Sorry, that wasn't a valid choice.")
