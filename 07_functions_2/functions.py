@@ -1,11 +1,7 @@
-# map.grades.py
-# produce list of tuples
-grades = [95, 88, 85, 75]
-letter_grade = ['A', 'B+', 'B', 'C']
-print('The original list ',letter_grade)
-print('The zipped tuples ', list(zip(letter_grade, grades)))
-print('Next is a map-lambda version')
-map(lambda a: a, letter_grade, grades)  # equivalent to zip
-#
-# Double click to copy code
+hp_damage = lambda h, dmg : h - dmg
+damage = 20
+hp = 100
+print(f'Your character took {damage} points of damge')
+print(f'Your character has droped from {hp} hit points to ' \
+    f'{hp_damage(hp,damage)} hit points available')
 
