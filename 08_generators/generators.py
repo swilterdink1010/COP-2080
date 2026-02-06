@@ -1,0 +1,1 @@
+print(*list(map(lambda x: -x, filter(lambda x: x < 0, a_list := [7, 2, 4, 6]))))
