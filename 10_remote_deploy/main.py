@@ -1,4 +1,4 @@
-import run_bash_cmd
+from run_bash_cmd import run_bash_cmd as rbc
 from menu import Menu
 
 def main():
@@ -11,11 +11,7 @@ def main():
     choice = 0
     while choice != 4:
         choice = mainMenu.getInput()
-        match choice:
-            case 1, 2, 3:
-                run_bash_cmd(choice)
-            case 4:
-                pass
+        rbc(choice)
             
 if __name__ == "__main__":
     main()
