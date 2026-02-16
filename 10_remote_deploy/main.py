@@ -15,3 +15,6 @@ def main():
                 run_bash_cmd(choice)
             case 4:
                 pass
+            
+if __name__ == "__main__":
+    main()
