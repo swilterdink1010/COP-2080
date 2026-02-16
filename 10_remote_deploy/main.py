@@ -8,6 +8,7 @@ def main():
     mainMenu.addOption("Display free ram and swap")
     mainMenu.addOption("Quit")
     
+    choice = 0
     while choice != 4:
         choice = mainMenu.getInput()
         match choice:

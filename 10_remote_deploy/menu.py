@@ -10,7 +10,7 @@ class Menu:
     def _printMenu(self):
         i = 1
         for option in self._options:
-            print(i + " " + option)
+            print(i, " " + option)
             i += 1
     ## Adds an option to the menu.
     #
@@ -20,10 +20,10 @@ class Menu:
     #   returns an index [1, n+1] from the list of menu options
     #        
     def getInput(self)->int:
-        input = 0
+        input_ = 0
         while True:
-            self._printMenu(self)
-            input = input("Enter a menu option: ")
-            if input <= len(self._options) and len > 0:
-                return input
+            self._printMenu()
+            input_ = int(input("Enter a menu option: "))
+            if input_ <= len(self._options) and input_ > 0:
+                return input_
             print(f"Please enter a valid selection from the menu [1 - {len(self._options)}]")
