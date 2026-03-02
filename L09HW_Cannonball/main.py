@@ -61,6 +61,18 @@ class Cannonball:
 
         return xs, ys
 
+
+class Crazyball(Cannonball):
+    def __init__(self, x):
+        super().__init__(x)
+        self._rand = random.randrange(0, 10)
+    
+    def move(self, sec, grav):
+        if (self.getX() < 400):
+            self._x += self._rand 
+        super().move(sec, grav)
+        
+
 def run_app():
     st.title("Cannonball Trajectory")
 
@@ -76,10 +88,12 @@ def run_app():
 
     col1, col2 = st.columns(2)
     simulate = col1.button("Simulate")
+    crazyToggle = col2.checkbox("Crazy Mode")
 
     if simulate:
         angle_rad = radians(angle_deg)
-        ball = Cannonball(0)
+        ball = Crazyball(0) if crazyToggle else Cannonball(0)
+            
         xs, ys = ball.shoot(angle_rad, velocity, gravity, step)
 
         if not xs:
