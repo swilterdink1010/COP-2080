@@ -65,13 +65,13 @@ class Cannonball:
 class Crazyball(Cannonball):
     def __init__(self, x):
         super().__init__(x)
-        self._rand = random.randrange(0, 10)
+        self._rand = random.uniform(-.5, 1.5)
     
     def move(self, sec, grav):
         if (self.getX() < 400):
-            self._x += self._rand 
+            self._vx += self._rand 
         super().move(sec, grav)
-        
+    
 
 def run_app():
     st.title("Cannonball Trajectory")
@@ -106,7 +106,7 @@ def run_app():
             alt.Chart(df)
             .mark_line()
             .encode(
-                x=alt.X("x:Q", scale=alt.Scale(domain=[0, 200]), title="Distance (m)"),
+                x=alt.X("x:Q", scale=alt.Scale(domain=[0, max(200, ball.getX())]), title="Distance (m)"),
                 y=alt.Y("y:Q", scale=alt.Scale(domain=[0, 100]), title="Height (m)")
             )
             .properties(width=700, height=400)
