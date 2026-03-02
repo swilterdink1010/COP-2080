@@ -6,6 +6,20 @@ import streamlit as st
 import random
 
 
+class Print_Iface:
+    def __init__(self):
+        self.xs = []
+        self.ys = []
+        
+    def plot_add(self, x, y):
+        self.xs.append(x)
+        self.ys.append(y)
+        print(f"{x}, {y}")
+    
+    def getMaxY(self):
+        return max(self.ys)
+                   
+
 ## Represent a cannonball, tracking its position and velocity.
 #
 class Cannonball:
@@ -17,6 +31,7 @@ class Cannonball:
         self._y = 0
         self._vx = 0
         self._vy = 0
+        self.iface = Print_Iface()
 
     ## Move the cannon ball, using its current velocities.
     #  @param sec the amount of time that has elapsed.
@@ -51,15 +66,14 @@ class Cannonball:
         self._vy = velocity * sin(angle)
         self.move(step, user_grav)
 
-        xs = []
-        ys = []
-
         while self.getY() > 1e-14:
-            xs.append(self.getX())
-            ys.append(self.getY())
+            self.iface.plot_add(self.getX(), self.getY())
             self.move(step, user_grav)
-
-        return xs, ys
+        
+        print(self.iface.xs)
+        print(self.iface.ys)
+        
+        return self.iface.xs, self.iface.ys
 
 
 class Crazyball(Cannonball):
@@ -81,7 +95,13 @@ def run_app():
     )
     velocity = st.selectbox("Initial velocity", options=[15, 25, 40], index=1)
 
-    gravity_options = {"Earth": 9.81}
+    gravity_options = {
+        "Earth": 9.81,
+        "Moon": 1.62,
+        "Mars": 3.71,
+        "Jupiter": 24.79,
+        
+    }
     gravity_name = st.selectbox("Gravity", options=list(gravity_options.keys()), index=0)
     gravity = gravity_options[gravity_name]
     step = .1
@@ -107,7 +127,7 @@ def run_app():
             .mark_line()
             .encode(
                 x=alt.X("x:Q", scale=alt.Scale(domain=[0, max(200, ball.getX())]), title="Distance (m)"),
-                y=alt.Y("y:Q", scale=alt.Scale(domain=[0, 100]), title="Height (m)")
+                y=alt.Y("y:Q", scale=alt.Scale(domain=[0, max(100, ball.iface.getMaxY())]), title="Height (m)")
             )
             .properties(width=700, height=400)
         )
